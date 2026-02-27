@@ -1,0 +1,660 @@
+html, body {
+    touch-action: none;
+}
+
+::root {
+    --arrow-hover-offset: 0;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    touch-action: none;
+}
+
+/* FONTS */
+
+.roboto-slab-thin {
+  font-family: "Roboto Slab", serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.inconsolata-light {
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.inconsolata-medium {
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.roboto-slab-light {
+  font-family: "Roboto Slab", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.roboto-thin {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.roboto-light {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.roboto-medium {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.roboto-black {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.roboto-thin-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.roboto-light-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.roboto-regular-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.roboto-medium-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.roboto-bold-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.roboto-black-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+
+#overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+#info-panel {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: rgba(39, 39, 39, 0.4);
+    color: white;
+    padding: 1.2rem;
+    box-shadow: 0 0 0px rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
+    width: 320px;
+    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    border-radius: 5px;
+    backdrop-filter: blur(10px);
+}
+
+#info-panel .full-width {
+    width: 100%;
+    margin-bottom: 10px; /* Add margin to separate from columns */
+}
+
+#info-panel .columns {
+    display: flex; /* Use flexbox to align columns side by side */
+    width: 100%;
+}
+
+#info-panel .left-column {
+    width: 60%;
+    padding-right: 10px; /* Add padding for better spacing */
+}
+
+#info-panel .right-column {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+#info-panel h1 {
+    font-size: 32px;
+    margin: 0 0 5px 0;
+}
+
+#info-panel h2 {
+    font-size: 12px;
+    margin: 0 0 5px 0;
+    opacity: 0.6;
+}
+
+#info-panel p {
+    margin: 5px 0;
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+#info-panel h2#date {
+    margin-bottom: -5px;
+}
+
+#info-panel #description {
+  opacity: 1;
+  line-height: 1.15rem;
+  font-size: .8rem;
+}
+
+#carousel-controls {
+    position: absolute;
+    display: flex;
+    pointer-events: auto;
+    width: 100vw;
+    justify-content: center;
+    bottom: 1.5rem;
+}
+
+#carousel-controls .arrows {
+    display: flex;
+    align-items: center;
+    gap: 0.0rem; /* distance fixe entre les boutons */
+}
+
+
+#carousel-controls > .container {
+  display: flex;
+  flex: 1;
+}
+
+#carousel-controls > .container:first-child{
+  justify-content: end;
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 1, 'wght' 100, 'GRAD' 0, 'opsz' 24;
+    /* color: white; */
+}
+
+.arrow {
+    transition: none; /* 🔥 Supprime toute animation */
+}
+
+.arrow {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    position: relative;
+    cursor: pointer;
+    opacity: 0.8;
+    border-radius: 1000px;
+    color: white;
+    background: rgba(39, 39, 39, 0.4); /* Même fond que #info-panel */
+    margin: 0.5rem;
+    backdrop-filter: blur(10px); /* Ajoute le flou */
+}
+
+.arrow:hover {
+    opacity: 1.0; /* 🔥 Empêche tout changement d'opacité */
+}
+
+.arrow.left span {
+    position: relative;
+    left: 4px; /* 🔥 Décale uniquement l'icône de la flèche */
+}
+
+.arrow.left{
+  justify-content: flex-end;
+}
+
+.arrow.left > .material-symbols-outlined{
+  transform: none;
+}
+
+.arrow.right:hover .material-symbols-outlined,
+.arrow.left:hover .material-symbols-outlined {
+  transform: none;
+  margin: 0;
+}
+
+.arrow > .label{
+  letter-spacing: .05rem;
+  text-transform: uppercase;
+  font-size: .8rem;
+  opacity: 0;
+  position: absolute;
+}
+
+.arrow span {
+    font-size: 1.5rem;
+}
+
+.arrow .label {
+    opacity: 1.0; /* 🔥 Toujours visible, pas d'animation */
+    transition: none; /* 🔥 Supprime la transition */
+}
+
+.arrow .material-symbols-outlined {
+    transition: none; /* 🔥 Supprime toute animation */
+}
+
+
+/* FOOTER */
+.footer {
+  text-decoration: none;
+  pointer-events: auto;
+  position: absolute;
+  font-size: 0.8rem;
+
+  right: 2rem;          /* ✅ bas-droite */
+  bottom: 2rem;
+  left: auto;
+
+  color: white;
+  opacity: 0.8;
+  transition: all 0.1s ease-in-out;
+}
+
+.footer:visited {
+  color: white !important;
+}
+
+.footer:hover {
+  opacity: 1;
+}
+
+
+.pc-icon{
+  background-image: url(https://playcanvas.com/static-assets/images/icons/favicon_launcher.png);
+  width: .9rem;
+  height: .9rem;
+  background-size: contain;
+  margin: .2rem;
+  display: inline-block;
+  vertical-align: middle;
+  transform: translateY(-.1rem);
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 950px) and (orientation: landscape) {
+
+  #info-panel{
+    right: 0;
+    top: 0;
+    width: 200px;
+    height: 100%;
+  }
+
+  #info-panel .columns .right-column {
+      display: none; /* Hide left and right columns */
+      
+  }
+
+  #info-panel .columns .left-column {
+    width: 100%;    
+  }
+
+  .footer{
+    display: none;
+  }
+}
+
+@media (max-width: 800px) and (orientation: portrait){
+
+    #info-panel{
+      width: 100%;
+      position: static;
+      border-radius: 0;
+      max-width: 100%;
+      padding: 1.6rem 1.6rem; 
+      }
+
+    #info-panel h1 {
+      font-size: 24px;
+      margin: 0 0 5px 0;
+    }
+
+    .footer {
+      display: none;
+    }
+
+    #info-panel .columns {
+        display: none; /* Hide left and right columns */
+    }
+}
+
+/* Petit bouton type HD ou plein écran */
+.arrow.small {
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+    border-radius: 1000px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(60, 60, 60, 0.60);
+    opacity: 0.8;
+    cursor: pointer;
+    margin: 0.5rem;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+#explode-button {
+    margin: 0 !important;
+}
+
+
+.arrow.small:hover {
+    opacity: 1;
+}
+
+#hd-button .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 10, 'GRAD' 0, 'opsz' 24;
+    font-size: 1.5rem;
+    line-height: 1;
+    display: inline-block;
+}
+
+#custom-loading-bar {
+    box-sizing: content-box !important;
+    transform: none !important;
+    height: 5px !important;
+    zoom: 1 !important;
+}
+
+@media (max-width: 768px) {
+  #logo {
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    height: auto;
+    /* suppression du opacity forcé */
+    pointer-events: auto;
+  }
+
+  #logo img {
+    width: 100vw !important;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+#play-button {
+    width: 2.5rem;             /* plus gros cercle */
+    height: 2.5rem;
+    background: rgba(39, 39, 39, 0.4);
+    border-radius: 1000px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+#play-button:hover {
+    opacity: 1;
+}
+
+#play-button.active {
+    background: rgba(200, 200, 200, 0.3); /* cercle plus clair */
+    color: #ccc; /* symbole plus clair */
+}
+
+#play-button.active span {
+    color: #ccc;
+}
+
+#play-button .play-icon {
+    width: 3rem;
+    height: 4rem;
+    color: white;
+    display: block;
+    transform: scaleY(1.2); /* ⬅️ étire verticalement */
+    transform-origin: center;
+}
+
+/* Quand actif : icône plus claire */
+#play-button.active .play-icon {
+    color: #ccc;
+}
+
+#carousel-controls {
+    transform: scale(0.9); /* 🔽 Réduit à 90% */
+    transform-origin: center bottom; /* ✅ Centre bien le scale */
+}
+
+/*
+@media (max-width: 800px) {
+  #play-button {
+    display: none !important;
+  }
+}
+*/
+
+@media (max-width: 800px) {
+  #carousel-controls .arrows {
+    justify-content: center;
+    gap: -3.0rem; /* ou ajuster l’espacement général */
+  }
+
+  /* Réduire l’espace entre les petits ronds INT et flèche gauche */
+  #hd-button {
+    margin-right: 0.5rem;
+  }
+
+  /* Réduire l’espace entre flèche droite et fullscreen */
+  #fullscreen-button {
+    margin-left: 0.5rem;
+  }
+}
+
+@keyframes flashWhite {
+  0%   { background-color: rgba(255, 255, 255, 0); }
+  50%  { background-color: rgba(255, 255, 255, 0.35); }
+  100% { background-color: rgba(255, 255, 255, 0); }
+}
+
+.blink-white {
+  animation: flashWhite 1s ease-in-out;
+}
+
+#hand-hint {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 6rem;
+    color: white;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 1000;
+    animation: none;
+}
+
+@keyframes handMove {
+    0%   { transform: translate(-50%, -50%) translateX(0); }
+    33%  { transform: translate(-50%, -50%) translateX(16px); }
+    66%  { transform: translate(-50%, -50%) translateX(-16px); }
+    100% { transform: translate(-50%, -50%) translateX(0); }
+}
+
+#hand-hint-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.60); /* 👇 30% d’opacité */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 999; /* juste sous la main */
+}
+
+#hand-hint {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 6rem;
+    color: white;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 1000;
+    animation: none;
+}
+
+#hd-button {
+  position: absolute;
+  left: 2rem;
+  bottom: 2rem;
+  font-size: 0.8rem;
+  font-family: "Inconsolata", monospace;
+  font-weight: 300;
+  color: #ccc;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: auto;
+  display: inline-block;
+  z-index: 20; /* 🔒 pour ne pas être recouvert par SA3D */
+}
+
+#hd-button:hover {
+  color: white;
+}
+
+#hd-button:visited {
+  color: #ccc !important;
+}
+
+/* Cacher HD sur mobile */
+@media (max-width: 950px) and (orientation: landscape),
+       (max-width: 800px) and (orientation: portrait){
+    #hd-button {
+        display: none;
+    }
+}
+
+/* Picto étoiles (force override) */
+#explode-button .explode-icon{
+    display: block;
+    font-size: 2.0rem !important;      /* ✅ ajuste ici */
+    line-height: 1 !important;         /* ✅ évite le décalage vertical */
+    letter-spacing: 0 !important;      /* ✅ sinon ça décale optiquement */
+    color: #838383 !important;
+    opacity: 1;
+    user-select: none;
+}
+
+#explode-button{
+  position: absolute;
+  left: 50%;
+  bottom: 1.6rem;
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: auto;
+  z-index: 9999;
+}
+
+/* EXPLODE doit être cliquable même si #overlay a pointer-events:none */
+#explode-button{
+  pointer-events: auto;
+  z-index: 9999;  /* au-dessus de tout */
+}
+
+/* --- Hint EXPLODE (sans changer la couleur du bouton) --- */
+#explode-button {
+  position: absolute; /* tu l'as déjà, je le laisse safe */
+  overflow: visible;  /* important: laisse le glow dépasser */
+}
+
+#explode-button::after {
+  content: "";
+  position: absolute;
+  inset: -6px;                 /* petit débord autour du bouton */
+  border-radius: 999px;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at 50% 50%,
+    rgba(255,255,255,0.22) 0%,
+    rgba(255,255,255,0.10) 35%,
+    rgba(255,255,255,0.00) 70%);
+  transition: opacity 0.2s ease;
+}
+
+/* Animation douce du pseudo-élément (pas du background) */
+@keyframes explodeHintOverlay {
+  0%   { opacity: 0;   transform: scale(1); }
+  45%  { opacity: 1;   transform: scale(1.02); }
+  100% { opacity: 0;   transform: scale(1); }
+}
+
+#explode-button.explode-hint::after {
+  animation: explodeHintOverlay 900ms ease-in-out;
+}
